@@ -28,8 +28,14 @@ Route::prefix('dashboard')->group(function () {
     // Quản lý sản phẩm
     Route::prefix('products')->group(function(){
         Route::get('/', [\App\Http\Controllers\backend\ProductController::class,'index'])->name('backend.product.index');
+        //Thêm mới
         Route::get('/create', [\App\Http\Controllers\backend\ProductController::class,'create'])->name('backend.product.create');
-        Route::get('/{id}', [\App\Http\Controllers\Backend\ProductController::class,'showImages'])->name('backend.product.showImage');
+        Route::post('/', [\App\Http\Controllers\backend\ProductController::class,'store'])->name('backend.product.store');
+        //Chỉnh sửa
+        Route::get('/{id}/edit', [\App\Http\Controllers\backend\ProductController::class,'edit'])->name('backend.product.edit');
+        Route::put('/{id}', [\App\Http\Controllers\backend\ProductController::class,'update'])->name('backend.product.update');
+
+        // Route::get('/{id}', [\App\Http\Controllers\Backend\ProductController::class,'showImages'])->name('backend.product.showImage');
     });
     // Quản lý người dùng
     Route::prefix('users')->group(function(){
@@ -41,8 +47,14 @@ Route::prefix('dashboard')->group(function () {
     // Quản lý danh mục
     Route::prefix('categories')->group(function(){
         Route::get('/', [\App\Http\Controllers\backend\CategoryController::class,'index'])->name('backend.categories.index');
+        //Thêm mới
         Route::get('/create', [\App\Http\Controllers\backend\CategoryController::class,'create'])->name('backend.categories.create');
-        Route::get('/{id}', [\App\Http\Controllers\Backend\CategoryController::class,'showProducts'])->name('backend.categories.showProducts');
+        Route::post('/', [\App\Http\Controllers\backend\CategoryController::class,'store'])->name('backend.categories.store');
+        //Chỉnh sửa
+        Route::get('/{id}/edit', [\App\Http\Controllers\backend\CategoryController::class,'edit'])->name('backend.categories.edit');
+        Route::put('/{id}', [\App\Http\Controllers\backend\CategoryController::class,'update'])->name('backend.categories.update');
+
+        // Route::get('/{id}', [\App\Http\Controllers\Backend\CategoryController::class,'showProducts'])->name('backend.categories.showProducts');
     });
     // Quản lý đặt hàng
     Route::prefix('orders')->group(function(){

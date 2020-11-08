@@ -26,12 +26,14 @@
                 </div>
                 <div class="x_content col-md-10 center-margin">
                     <br />
-                    <form id="demo-form2" method="post" action="{{ route('backend.categories.store') }}" data-parsley-validate class="form-horizontal form-label-left">
-                        @csrf
+                    <form id="demo-form2" method="post" action="{{ route('backend.categories.update', $category->id) }}" data-parsley-validate class="form-horizontal form-label-left">
+
+                        {{ csrf_field() }}
+                        {{ method_field('PUT') }}
 
                         <div class="form-group row col-md-12">
                             <label>Tên danh mục</label>
-                            <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục">
+                        <input type="text" name="name" class="form-control" placeholder="Nhập tên danh mục" value="{{ $category->name }}">
                             @error('name')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
@@ -42,7 +44,7 @@
                             <div class="col-md-6 col-sm-6 offset-md-3">
                                 <button class="btn btn-primary" type="button">Thoát</button>
                                 <button class="btn btn-primary" type="reset">Xoá</button>
-                                <button type="submit" class="btn btn-success">Thêm mới</button>
+                                <button type="submit" class="btn btn-success">Cập nhật</button>
                             </div>
                         </div>
 

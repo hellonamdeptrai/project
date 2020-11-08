@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,18 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request)
+    {
+        $email = $request->get('email');
+        $password = $request->get('password');
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            if(Auth::user()->postion == 0)
+                return redirect()->route('backend.dashboard');
+            else
+                return redirect()->route('frontend.index');
+        }
     }
 
 }

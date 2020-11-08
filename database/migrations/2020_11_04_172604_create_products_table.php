@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->string('brand');
             $table->integer('origin_price');
             $table->integer('sale_price');
             $table->integer('discount_percent');

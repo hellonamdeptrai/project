@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.categories.create');
     }
 
     /**
@@ -38,9 +39,17 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        $category = new Category();
+
+        $category->name = $request->get('name');
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->parent_id = 1;
+        $category->depth = $request->get('name').'/';
+        $category->save();
+
+        return redirect()->route('backend.categories.index');
     }
 
     /**
@@ -62,7 +71,10 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Category::find($id);
+        return view('backend.categories.edit')->with([
+            'category' => $category
+        ]);
     }
 
     /**
@@ -72,9 +84,17 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategoryRequest $request, $id)
     {
-        //
+        $category = Category::find($id);
+
+        $category->name = $request->get('name');
+        $category->slug = \Illuminate\Support\Str::slug($request->get('name'));
+        $category->parent_id = 1;
+        $category->depth = $request->get('name').'/';
+        $category->save();
+
+        return redirect()->route('backend.categories.index');
     }
 
     /**

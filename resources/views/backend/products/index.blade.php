@@ -20,7 +20,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>Danh mục</h2>
-            <div class="clearfix"></div>
+            <div class="clearfix"><a href="">sdsaed</a></div>
         </div>
         <div class="x_content">
             <table class="table table-hover">
@@ -40,9 +40,11 @@
                         <td>{{ $product->name }}</td>
                         <td>
                             @if($product->status == 1)
-                                Hoạt động
+                                Mở bán
+                            @elseif($product->status == 0)
+                                Đang nhập
                             @else
-                                Đã khóa
+                                Hết hàng
                             @endif
                         </td>
                         <td>{{ $product->updated_at }}</td>

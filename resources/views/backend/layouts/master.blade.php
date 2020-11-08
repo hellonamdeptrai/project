@@ -37,6 +37,10 @@
 
     <!-- Custom Theme Style -->
     <link href="/backend/build/css/custom.min.css" rel="stylesheet">
+
+    <script src="/backend/vendors/jquery/dist/jquery.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -64,8 +68,14 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+</script>
+
 <!-- jQuery -->
-<script src="/backend/vendors/jquery/dist/jquery.min.js"></script>
+{{-- <script src="/backend/vendors/jquery/dist/jquery.min.js"></script> --}}
 <!-- Bootstrap -->
 <script src="/backend/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <!-- FastClick -->
@@ -120,6 +130,7 @@
 
 <!-- Custom Theme Scripts -->
 <script src="/backend/build/js/custom.min.js"></script>
+
 
 </body>
 </html>
