@@ -26,7 +26,7 @@
                 </div>
                 <div class="x_content col-md-10 center-margin">
                     <br />
-                    <form id="demo-form2" method="post" action="{{ route('backend.product.store') }}" data-parsley-validate class="form-horizontal form-label-left">
+                    <form id="demo-form2" method="post" action="{{ route('backend.product.store') }}" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row col-md-12">
@@ -61,9 +61,12 @@
                         <div class="form-group row col-md-12">
                             <label>Hình ảnh điện thoại</label>
                             <div class="col-md-12">
-                                <input type="file" class="custom-file-input" id="exampleInputFile">
+                                <input type="file" name="images[]" class="custom-file-input" id="exampleInputFile" multiple>
                                 <label class="custom-file-label" for="exampleInputFile">Chọn ảnh</label>
                             </div>
+                            @error('images')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group row col-md-6">

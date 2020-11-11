@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
@@ -90,6 +92,8 @@ class ProductController extends Controller
         //         ->withInput();
         // }
 
+
+
         $product = new Product();
 
         $product->name = $request->get('name');
@@ -104,6 +108,17 @@ class ProductController extends Controller
         $product->discount_percent = 100;
         $product->save();
 
+
+        $files = $request->file('images');
+        foreach ($files as $file){
+            $path = Storage::disk('public')->putFileAs('images', $file,$file->getClientOriginalName());
+
+            $image = new Image();
+            $image->name = $file->getClientOriginalName();
+            $image->path = $path;
+            $image->product_id = $product->id;
+            $image->save();
+        }
         return redirect()->route('backend.product.index');
     }
 

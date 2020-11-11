@@ -34,6 +34,8 @@ class StoreProductRequest extends FormRequest
             'name' => 'required|min:2|max:100',
             'category_id' => 'in:'.$string,
             'brand' => 'required',
+            'images' => 'required||max:2048',
+            // 'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'origin_price' => 'required|numeric',
             'sale_price' => 'required|numeric',
             'content' => 'required',
@@ -45,10 +47,12 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'required' => ':attribute không được để trống',
-            'min' => ':attribute phải có dữ liệu',
-            'max' => ':attribute quá lớn',
+            'min' => ':attribute dữ liệu phải lớn hơn 2',
+            'max' => ':attribute kích thước quá lớn',
             'numeric' => ':attribute phải là số',
             'in' => ':attribute phải chọn mục',
+            'mimes' => ':attribute phải là định dang jpeg,jpg,png',
+            'image' => ':attribute phải chọn đúng định dạng ảnh',
         ];
     }
 
@@ -63,6 +67,7 @@ class StoreProductRequest extends FormRequest
             'sale_price' => 'Giá sale',
             'content' => 'Mô tả điện thoại',
             'status' => 'Trạng thái',
+            'images' => 'Ảnh',
         ];
     }
 }
